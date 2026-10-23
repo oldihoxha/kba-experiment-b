@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.strip {
+  display: flex;
+  flex: 1;
+  gap: 3px;
+  min-width: 0;
+}
+
+.segment,
+.segmentDone {
+  flex: 1;
+  height: 0.75rem;
+  border-radius: 2px;
+  transition: background-color var(--dur-m) var(--ease);
+}
+
+.segment {
+  background: var(--bar-open, var(--color-track));
+}
+
+.segmentDone {
+  background: var(--bar-done, var(--color-brand));
+}
+
+.native {
+  flex: 1;
+  min-width: 0;
+  height: 0.75rem;
+  appearance: none;
+  border: 0;
+  border-radius: 2px;
+  background: var(--bar-open, var(--color-track));
+  overflow: hidden;
+}
+
+.native::-webkit-progress-bar {
+  background: var(--bar-open, var(--color-track));
+}
+
+.native::-webkit-progress-value {
+  background: var(--bar-done, var(--color-brand));
+}
+
+.native::-moz-progress-bar {
+  background: var(--bar-done, var(--color-brand));
+}
+
+.value {
+  min-width: 3.5ch;
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-sm);
+}

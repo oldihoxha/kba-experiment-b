@@ -1,0 +1,88 @@
+:root {
+  color-scheme: light dark;
+
+  /* Markenfarben (Flächen, Balken, Akzente) */
+  --color-brand: #76b900;
+  --color-on-brand: #111111;
+  --color-on-brand-soft: rgb(17 17 17 / 0.22);
+  --color-focus-on-brand: #000000;
+  --color-info: #0082d1;
+  --color-urgent: #ff5f00;
+  --color-on-urgent: #111111;
+
+  /* Abgeleitete Textfarben (WCAG AA auf --color-bg und --color-surface) */
+  --color-brand-text: #3f6900;
+  --color-info-text: #0068a8;
+  --color-urgent-text: #b33f00;
+
+  /* Neutrale Flächen und Text */
+  --color-bg: #f2f2f2;
+  --color-surface: #ffffff;
+  --color-surface-selected: #e8e8e8;
+  --color-text: #141414;
+  --color-text-muted: #595959;
+  --color-line: #d6d6d6;
+  --color-line-strong: #8a8a8a;
+  --color-track: #d6d6d6;
+  --color-backdrop: rgb(0 0 0 / 0.55);
+
+  /* Schrift */
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Avenir Next', 'Segoe UI Variable Display', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.5rem;
+  --fs-display: clamp(4.5rem, 24vw, 8rem);
+  --lh-body: 1.5;
+  --lh-tight: 1.15;
+
+  /* Abstände */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --gutter: 1rem;
+
+  /* Form */
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-pill: 999px;
+  --touch: 2.75rem;
+  --focus-ring: 3px solid var(--color-info-text);
+  --focus-offset: 2px;
+
+  /* Bewegung */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-s: 120ms;
+  --dur-m: 200ms;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 1.5rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-brand-text: #8fcf1a;
+    --color-info-text: #4db0f0;
+    --color-urgent-text: #ff8a4d;
+
+    --color-bg: #111111;
+    --color-surface: #1c1c1c;
+    --color-surface-selected: #262626;
+    --color-text: #f2f2f2;
+    --color-text-muted: #ababab;
+    --color-line: #363636;
+    --color-line-strong: #7a7a7a;
+    --color-track: #3a3a3a;
+    --color-backdrop: rgb(0 0 0 / 0.7);
+  }
+}

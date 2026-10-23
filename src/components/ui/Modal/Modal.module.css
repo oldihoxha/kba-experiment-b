@@ -1,0 +1,59 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--color-backdrop);
+}
+
+.dialog {
+  width: 100%;
+  max-width: 30rem;
+  padding: var(--space-5) var(--gutter) var(--space-5);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-top: 6px solid var(--color-urgent);
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+  animation: rise var(--dur-m) var(--ease);
+}
+
+.title {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-3);
+}
+
+.body {
+  margin-bottom: var(--space-5);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-3);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .backdrop {
+    align-items: center;
+  }
+
+  .dialog {
+    border-radius: var(--radius-m);
+    padding: var(--space-5);
+  }
+
+  .actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
