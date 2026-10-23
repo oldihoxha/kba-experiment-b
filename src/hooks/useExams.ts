@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Exam, ExamInput, Topic } from '../types/exam';
 import { loadExams, saveExams } from '../services/storage';
 import { compareExams, daysUntil } from '../utils/date';
+import { SAMPLE_EXAMS } from '../data/sampleExams';
 
 export interface UseExams {
   exams: Exam[];
@@ -14,6 +15,8 @@ export interface UseExams {
   addExam: (input: ExamInput) => string;
   updateExam: (id: string, input: ExamInput) => void;
   deleteExam: (id: string) => void;
+  /** Ersetzt alle vorhandenen Klausuren durch die Beispieldaten. */
+  replaceWithSamples: () => void;
   addTopic: (examId: string, title: string) => void;
   renameTopic: (examId: string, topicId: string, title: string) => void;
   deleteTopic: (examId: string, topicId: string) => void;
@@ -85,6 +88,14 @@ export function useExams(): UseExams {
       return id;
     },
     updateExam: (id, input) => updateExamById(id, (exam) => ({ ...exam, ...input })),
+    replaceWithSamples: () =>
+      commit(() =>
+        SAMPLE_EXAMS.map(({ topics, ...input }) => ({
+          ...input,
+          id: createId(),
+          topics: topics.map((title) => ({ id: createId(), title, done: false })),
+        })),
+      ),
     deleteExam: (id) => commit((current) => current.filter((exam) => exam.id !== id)),
     addTopic: (examId, title) =>
       updateExamById(examId, (exam) => ({

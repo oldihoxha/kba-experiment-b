@@ -45,3 +45,7 @@
     padding-top: var(--space-3);
   }
 }
+
+.samples {
+  margin-top: var(--space-5);
+}

@@ -13,9 +13,10 @@ interface ExamListProps {
   selectedId: string | null;
   onOpen: (id: string) => void;
   onCreate: () => void;
+  onLoadSamples: () => void;
 }
 
-export function ExamList({ upcoming, past, selectedId, onOpen, onCreate }: ExamListProps) {
+export function ExamList({ upcoming, past, selectedId, onOpen, onCreate, onLoadSamples }: ExamListProps) {
   const [showPast, setShowPast] = useState(false);
   const pastId = useId();
   const [next, ...later] = upcoming;
@@ -29,6 +30,7 @@ export function ExamList({ upcoming, past, selectedId, onOpen, onCreate }: ExamL
         <Button variant="primary" icon="plus" onClick={onCreate}>
           Erste Klausur anlegen
         </Button>
+        <Button onClick={onLoadSamples}>Beispieldaten laden</Button>
       </EmptyState>
     );
   }

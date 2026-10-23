@@ -5,6 +5,7 @@ import { ExamList } from './components/exams/ExamList/ExamList';
 import { ExamDetail } from './components/exams/ExamDetail/ExamDetail';
 import { ExamForm } from './components/exams/ExamForm/ExamForm';
 import { Button } from './components/ui/Button/Button';
+import { Modal } from './components/ui/Modal/Modal';
 import styles from './App.module.css';
 
 type View = { kind: 'list' } | { kind: 'detail'; id: string } | { kind: 'form'; id: string | null };
@@ -12,6 +13,7 @@ type View = { kind: 'list' } | { kind: 'detail'; id: string } | { kind: 'form'; 
 export function App() {
   const store = useExams();
   const [view, setView] = useState<View>({ kind: 'list' });
+  const [confirmSamples, setConfirmSamples] = useState(false);
 
   const examId = view.kind === 'list' ? null : view.id;
   const exam = examId ? store.getExam(examId) : undefined;
@@ -20,6 +22,11 @@ export function App() {
   const paneOpen = showForm || showDetail;
 
   const goList = () => setView({ kind: 'list' });
+  const loadSamples = () => {
+    store.replaceWithSamples();
+    setConfirmSamples(false);
+    goList();
+  };
   const openDetail = (id: string) => setView({ kind: 'detail', id });
 
   const notice = store.saveFailed && (
@@ -44,7 +51,13 @@ export function App() {
             selectedId={examId}
             onOpen={openDetail}
             onCreate={() => setView({ kind: 'form', id: null })}
+            onLoadSamples={loadSamples}
           />
+          {store.exams.length > 0 && (
+            <Button variant="quiet" className={styles.samples} onClick={() => setConfirmSamples(true)}>
+              Beispieldaten laden
+            </Button>
+          )}
         </div>
         <div className={paneOpen ? styles.pane : styles.paneHidden}>
           {showForm && (
@@ -84,6 +97,22 @@ export function App() {
           )}
         </div>
       </div>
+      {confirmSamples && (
+        <Modal
+          title="Beispieldaten laden?"
+          onClose={() => setConfirmSamples(false)}
+          actions={
+            <>
+              <Button onClick={() => setConfirmSamples(false)}>Abbrechen</Button>
+              <Button variant="danger" onClick={loadSamples}>
+                Daten ersetzen
+              </Button>
+            </>
+          }
+        >
+          <p>Alle deine Klausuren und Lernthemen werden durch drei Beispielklausuren ersetzt.</p>
+        </Modal>
+      )}
     </AppShell>
   );
 }
